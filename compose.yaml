@@ -1,0 +1,17 @@
+services:
+  db:
+    #image: mariadb:10.6
+    #image: mariadb:11.7
+    image: mariadb:11.8.1-rc
+    environment:
+      - MARIADB_ROOT_PASSWORD=rootpwd
+      - MARIADB_USER=user
+      - MARIADB_PASSWORD=dbpwd
+      - MARIADB_DATABASE=db
+    healthcheck:
+      test: mysqladmin -u root -prootpwd status
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    ports:
+      - "127.0.0.1:3306:3306"
